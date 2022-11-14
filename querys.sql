@@ -156,21 +156,55 @@ select * from sales_stores;
     
 -- 8. Write a single SQL statement to find the following:
 -- a. Identify all orders where the sales list price does not equal the production list price.
-
+	select * from production_products;
+    select * from sales_order_items;
+    select sales_order_items.product_id, item_id, product_name, sales_order_items.list_price from sales_order_items
+    join production_products on sales_order_items.product_id = production_products.product_id
+    where sales_order_items.list_price <> production_products.list_price
+    order by product_name;
+    
 -- 9. Write a single SQL statement to find the following:
+select * from production_brands;
+select * from production_categories;
+select * from production_products;
+select * from production_stocks;
+select * from sales_customers;
+select * from sales_order_items;
+select * from sales_orders;
+select * from sales_staffs;
+select * from sales_stores;
+
 -- a. All orders that have not shipped yet.
+select order_id, shipped_date from sales_orders
+where shipped_date is null
+group by order_id;
+
 -- b. For all orders that have not shipped yet, the sum of the quantity ordered.
+select shipped_date, sum(list_price*quantity) AS sumoforders from sales_orders
+join sales_order_items on sales_orders.order_id = sales_order_items.order_id
+where shipped_date is null
+group by shipped_date;
+
 -- c. From the production_stocks table the total stock available per product_id, labelling
 -- the total stock column as “total_stock”
+select * from production_stocks;
+select * from production_products;
+select production_stocks.product_id, product_name, sum(quantity) AS total_stock from production_stocks
+JOIN production_products on production_stocks.product_id = production_products.product_id
+group by product_id;
+
+
 -- d. Using the example from answer c as an SQL derived table and using a WHERE
 -- statement to join all tables, create a table by product_id showing current quantity of
 -- orders not yet shipped and total stock available.
-
-
 select * from sales_order_items;
-select avg(discount) from sales_order_items;
+select * from sales_orders;
+select * from production_stocks;
+select * from production_products;
 
-select min(list_price), max(list_price) FROM sales_order_items;
-select avg(list_price) FROM sales_order_items;
-
-select sum(list_price*quantity*(1-discount)) FROM sales_order_items;
+select production_stocks.product_id, product_name, sum(production_stocks.quantity) AS total_stock, count(order_status= 3) AS orders_outstanding from production_stocks
+JOIN production_products on production_stocks.product_id = production_products.product_id
+join sales_order_items on sales_order_items.product_id = production_stocks.product_id
+join sales_orders on sales_orders.order_id = sales_order_items.order_id
+where shipped_date is null
+group by product_id;

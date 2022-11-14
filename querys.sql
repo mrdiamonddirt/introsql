@@ -1,21 +1,49 @@
 USE bdgtz9j1xtvceikhuc8p;
 
+SHOW TABLES;
+
+select * from production_brands;
+select * from production_categories;
+select * from production_products;
+select * from production_stocks;
+select * from sales_customers;
+select * from sales_order_items;
+select * from sales_orders;
+select * from sales_staffs;
+select * from sales_stores;
+
 -- SQL Assignments 
 
 -- 1 Write a single SQL select statement to find the following:
 -- a. A list of all employee names (first and last) from sales_staff table.
+select first_name, last_name from sales_staffs;
+
 -- b. CEO from the sales_staff table.
+select * from sales_staffs
+where staff_id = 1;
 -- c. All managers from the sales_staff table.
+select * from sales_staffs
+where manager_id = 1;
 -- d. A list of all customers including their first_name, last_name, email and phone
 -- number.
+select first_name, last_name, email, phone from sales_customers;
 -- e. A list of all stores including their store name and city.
+select store_name, city from sales_stores;
 -- f. A list of all products including their product_name list_price and brand_name from a
 -- join of production_products and production_brands tables.
-
+-- select * from production_brands;
+select product_name, list_price, brand_name from production_products
+JOIN production_brands ON production_products.brand_id = production_brands.brand_id;
 -- 2 Write a single SQL select statement to find the following:
 -- a. A count of all orders from the sales_orders table.
+	select * from sales_orders;
+    select count(*) FROM sales_orders;
 -- b. A count of all products from production_products table.
+select * from production_products;
+select count(*) FROM production_products;
 -- c. A count of all order_items from the sales_order_items table.
+select * from sales_orders;
+select count(*) FROM sales_orders;
 
 -- 3 Write a single SQL statement to find the following:
 -- a. A sum of all quantities from the sales_order_items table.
@@ -65,17 +93,6 @@ USE bdgtz9j1xtvceikhuc8p;
 -- statement to join all tables, create a table by product_id showing current quantity of
 -- orders not yet shipped and total stock available.
 
-SHOW TABLES;
-
-select * from production_brands;
-select * from production_categories;
-select * from production_products;
-select * from production_stocks;
-select * from sales_customers;
-select * from sales_order_items;
-select * from sales_orders;
-select * from sales_staffs;
-select * from sales_stores;
 
 select * from sales_order_items;
 select avg(discount) from sales_order_items;

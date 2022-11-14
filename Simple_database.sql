@@ -14,6 +14,19 @@ INSERT INTO current_job_detail VALUES (1000,"Payroll",16000,9000), (1001,"Tech L
 
 SHOW TABLES;
 
+-- GET NUMBER OF EMPLOYEES
+SELECT
+	count(*)
+FROM
+current_job_detail;
+
+SELECT salary, job_title
+FROM current_job_detail
+ORDER BY salary DESC;
+
+SELECT max(salary) AS highestSalary,
+FROM current_job_detail;
+
 SELECT * FROM employee_detail;
 SELECT * FROM laptop_detail;
 SELECT * FROM jobs_history;

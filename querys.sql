@@ -42,22 +42,29 @@ JOIN production_brands ON production_products.brand_id = production_brands.brand
 select * from production_products;
 select count(*) FROM production_products;
 -- c. A count of all order_items from the sales_order_items table.
-select * from sales_orders;
-select count(*) FROM sales_orders;
+select * from sales_order_items;
+select count(*) FROM sales_order_items;
 
 -- 3 Write a single SQL statement to find the following:
 -- a. A sum of all quantities from the sales_order_items table.
+select * from sales_order_items;
+select sum(quantity) FROM sales_order_items;
 -- b. A sum of all quantities multiplied by their individual list_price from the
 -- sales_order_items table.
+select * from sales_order_items;
+select sum(quantity*list_price) FROM sales_order_items;
 -- c. A sum of all quantities multiplied by their individual list_prices including their
 -- discount (i.e. multiplied by 1 – discount).
+select sum(quantity*list_price*(1-discount)) FROM sales_order_items;
 -- d. A sum of all quantities multiplied by their individual list_prices including their
 -- discount (i.e. multiplied by 1 – discount) but formatted using the FORMAT option to
 -- 2 decimal places and including commas.
+select format(sum(quantity*list_price*(1-discount)),2)  FROM sales_order_items;
 -- e. A sum of all quantities multiplied by their individual list_prices including their
 -- discount (i.e. multiplied by 1 – discount) but formatted using the FORMAT option to
 -- 2 decimal places and including commas with the column heading changed to
 -- Revenue using the AS option.
+select format(sum(quantity*list_price*(1-discount)),2) AS revenue FROM sales_order_items;
 
 -- 4 Write a single SQL statement to find the following:
 -- a. A list of all orders sorted ascending by order_id from sales_orders.

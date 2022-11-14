@@ -24,12 +24,33 @@ current_job_detail;
 select current_job_detail.employee_id, name, MAX(salary) From current_job_detail
 JOIN employee_detail ON current_job_detail.employee_id = employee_detail.employee_id;
 
+-- how many senoir developers wildcard
+SELECT * FROM current_job_detail
+WHERE job_title LIKE "%Developer%";
+
+SELECT * FROM current_job_detail
+WHERE job_title = "Lead Developer";
+
+SELECT * FROM current_job_detail
+WHERE job_title NOT LIKE '%Developer%';
+
+SELECT name, job_title,salary FROM current_job_detail
+JOIN employee_detail ON current_job_detail.employee_id = employee_detail.employee_id
+WHERE job_title NOT LIKE '%Developer%';
+
+select * From current_job_detail;
+-- how many in each wage bracket
+SELECT job_title, round(salary,-4), COUNT(*) FROM current_job_detail
+WHERE job_title Like '%Developer%'
+GROUP BY round(salary, -4)
+order by round(salary,-4);
+
 
 SELECT salary, job_title
 FROM current_job_detail
 ORDER BY salary DESC;
 
-SELECT max(salary) AS highestSalary,
+SELECT max(salary) AS highestSalary
 FROM current_job_detail;
 
 SELECT * FROM employee_detail;

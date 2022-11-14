@@ -99,18 +99,61 @@ order by order_id, item_id ASC;
 	select * from sales_order_items;
     select * from sales_staffs;
     select * from sales_orders;
-	select sales_order_items.order_id, list_price*quantity as salesvalue, sales_staffs.staff_id, sales_staffs.first_name from sales_order_items
+	select sales_order_items.order_id, sum(list_price*quantity) as salesvalue, sales_staffs.staff_id, sales_staffs.first_name from sales_order_items
     join sales_orders on sales_order_items.order_id = sales_orders.order_id
     join sales_staffs on sales_orders.staff_id = sales_staffs.staff_id
     group by first_name
     order by salesvalue desc;
 
 -- 7. Write a single SQL statement to find the following:
+select * from sales_customers;
+select * from sales_order_items;
+select * from sales_orders;
+select * from sales_staffs;
+select * from sales_stores;
 -- a. Total revenue per store descending.
+	select * from sales_stores;
+    select * from sales_order_items;
+    select * from sales_orders;
+    
+    select sales_order_items.order_id, sum(list_price*quantity) AS revenue, store_name from sales_order_items
+    join sales_orders on sales_orders.order_id = sales_order_items.order_id
+    join sales_stores on sales_orders.store_id = sales_stores.store_id
+    group by store_name
+    order by revenue desc;
+    
 -- b. Total revenue and total quantity ordered per item by revenue descending.
--- c. Total revenue per category descending.
--- d. Total revenue per customer (displaying customer name) descending.
+	select sales_order_items.order_id, sum(list_price*quantity) AS revenue, COUNT(quantity) AS totalquantity, store_name from sales_order_items
+    join sales_orders on sales_orders.order_id = sales_order_items.order_id
+    join sales_stores on sales_orders.store_id = sales_stores.store_id
+    group by store_name
+    order by revenue desc;
 
+-- c. Total revenue per category descending.
+	select * from sales_stores;
+    select * from sales_order_items;
+    select * from sales_orders;
+	select * from production_products;
+	select * from production_categories;
+	select production_categories.category_name, sum(sales_order_items.list_price*quantity) AS revenue, COUNT(quantity) AS totalquantity from sales_order_items
+    join sales_orders on sales_orders.order_id = sales_order_items.order_id
+    join sales_stores on sales_orders.store_id = sales_stores.store_id
+    join production_products on production_products.product_id = sales_order_items.product_id
+    join production_categories on production_categories.category_id = production_products.category_id
+    group by category_name
+    order by revenue desc;
+
+-- d. Total revenue per customer (displaying customer name) descending.
+	select * from sales_customers;
+	select  sales_customers.first_name, sum(sales_order_items.list_price*quantity) AS revenue, COUNT(quantity) AS totalquantity from sales_order_items
+    join sales_orders on sales_orders.order_id = sales_order_items.order_id
+    join sales_stores on sales_orders.store_id = sales_stores.store_id
+    join production_products on production_products.product_id = sales_order_items.product_id
+    JOIN sales_customers on sales_customers.customer_id = sales_orders.customer_id
+    group by sales_customers.customer_id
+    order by revenue desc;
+    
+    
 -- 8. Write a single SQL statement to find the following:
 -- a. Identify all orders where the sales list price does not equal the production list price.
 

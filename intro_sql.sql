@@ -16,8 +16,8 @@ INSERT INTO movies VALUES
 	(1,"SPIDERMAN","Tobey Maguire","sam raimi"),
 	(2,"SPIDERMAN 2","Tobey Maguire","sam raimi"),
 	(3,"SPIDERMAN 3","Tobey Maguire","sam raimi"),
-	(4,"The Amazing Spiderman","Andrew Garfield","Marc Webb"),
-	(5,"The Amazing Spiderman 2","Andrew Garfield","Marc Webb"),
+	(4,"The Amazing Spiderman","","Marc Webb"),
+	(5,"The Amazing Spiderman 2","","Marc Webb"),
 	(6,"Spider-Man: Homecoming","Tom Holland","Jon Watts"),
 	(7,"Spider-Man: Far From Home", "Tom Holland","Jon Watts"),
 	(8,"Spider-Man: No Way Home", "Tom Holland" , "Jon Watts");
@@ -30,5 +30,9 @@ SELECT * FROM movies;
 -- reaarch the UPDATE and DELETE command, amd add 4 or 5 movies update director on one and delete atleast one row
 -- update function
 UPDATE movies
-SET actor = 'Tobey Maguirei'
-WHERE director = "sam raimi";
+SET actor = 'Andrew Garfield'
+WHERE director = "marc webb";
+
+-- delete function
+DELETE FROM movies
+WHERE actor = "andrew garfield";

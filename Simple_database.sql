@@ -53,6 +53,10 @@ ORDER BY salary DESC;
 SELECT max(salary) AS highestSalary
 FROM current_job_detail;
 
+SELECT * FROM laptop_detail
+JOIN laptop_id on laptop_datail.laptop_id = current_job_detail.laptop_id;
+
+
 SELECT * FROM employee_detail;
 SELECT * FROM laptop_detail;
 SELECT * FROM jobs_history;

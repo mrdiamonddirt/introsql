@@ -14,11 +14,16 @@ INSERT INTO current_job_detail VALUES (1000,"Payroll",16000,9000), (1001,"Tech L
 
 SHOW TABLES;
 
--- GET NUMBER OF EMPLOYEES
+-- GET total NUMBER OF EMPLOYEES
 SELECT
 	count(*)
 FROM
 current_job_detail;
+
+-- highest paid employee
+select current_job_detail.employee_id, name, MAX(salary) From current_job_detail
+JOIN employee_detail ON current_job_detail.employee_id = employee_detail.employee_id;
+
 
 SELECT salary, job_title
 FROM current_job_detail

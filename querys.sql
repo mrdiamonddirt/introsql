@@ -92,10 +92,18 @@ order by order_id, item_id ASC;
 	select * from sales_stores;
     select first_name, last_name, sales_staffs.store_id, store_name from sales_staffs
     join sales_stores on sales_staffs.store_id = sales_stores.store_id
-    order by storename, last_name, first_name DESC;
+    order by store_name, last_name, first_name DESC;
     
 -- 6 Write a single SQL statement to find the following:
 -- a. A list of revenue per employee in descending order (two inner joins will be required)
+	select * from sales_order_items;
+    select * from sales_staffs;
+    select * from sales_orders;
+	select sales_order_items.order_id, list_price*quantity as salesvalue, sales_staffs.staff_id, sales_staffs.first_name from sales_order_items
+    join sales_orders on sales_order_items.order_id = sales_orders.order_id
+    join sales_staffs on sales_orders.staff_id = sales_staffs.staff_id
+    group by first_name
+    order by salesvalue desc;
 
 -- 7. Write a single SQL statement to find the following:
 -- a. Total revenue per store descending.

@@ -89,7 +89,11 @@ order by order_id, item_id ASC;
 -- 5. Write a single SQL statement to find the following:
 -- a. A list of employees (first and last name) and their store name ordered by store
 -- name, last_name and first_name mis descending order.
-
+	select * from sales_stores;
+    select first_name, last_name, sales_staffs.store_id, store_name from sales_staffs
+    join sales_stores on sales_staffs.store_id = sales_stores.store_id
+    order by storename, last_name, first_name DESC;
+    
 -- 6 Write a single SQL statement to find the following:
 -- a. A list of revenue per employee in descending order (two inner joins will be required)
 

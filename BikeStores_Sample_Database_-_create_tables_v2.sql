@@ -120,3 +120,11 @@ CREATE TABLE production_stocks (
 SHOW TABLES;
 
 select * from production_brands;
+select * from production_categories;
+select * from production_products;
+select * from production_stocks;
+select * from sales_customers;
+select * from sales_order_items;
+select * from sales_orders;
+select * from sales_staffs;
+select * from sales_stores;

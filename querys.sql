@@ -68,12 +68,23 @@ select format(sum(quantity*list_price*(1-discount)),2) AS revenue FROM sales_ord
 
 -- 4 Write a single SQL statement to find the following:
 -- a. A list of all orders sorted ascending by order_id from sales_orders.
+select * from sales_orders
+order by order_id ASC;
 -- b. A list of all order_items sorted ascending by order_id and item_id from sales_orders
 -- using an INNER JOIN to join sales_orders and sales_order_items.
+select * from sales_order_items;
+select * from sales_orders;
+select sales_orders.order_id, product_id from sales_orders
+JOIN sales_order_items on sales_orders.order_id = sales_order_items.order_id
+order by order_id ASC;
 -- c. A list of all order_items and their value (see 3 above) GROUPed by order_id and
 -- item_id sorted ascending by order_id and item_id from sales_orders using an INNER
 -- JOIN to join sales_orders and sales_order_items. Rename the column with value to
 -- be Item Value.
+select sales_orders.order_id, product_id, list_price AS itemvalue from sales_orders
+JOIN sales_order_items on sales_orders.order_id = sales_order_items.order_id
+group by order_id
+order by order_id, item_id ASC;
 
 -- 5. Write a single SQL statement to find the following:
 -- a. A list of employees (first and last name) and their store name ordered by store
